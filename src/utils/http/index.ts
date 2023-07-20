@@ -3,7 +3,7 @@ import axios, {
   type AxiosResponse,
   type AxiosRequestConfig,
 } from "axios";
-import type { IHTTPClient, ApiResponse } from "./types";
+import type { IHTTPClient } from "./types";
 
 class HTTPClient implements IHTTPClient {
   private axiosInstance: AxiosInstance;
@@ -23,32 +23,40 @@ class HTTPClient implements IHTTPClient {
     return response.data;
   }
 
-  public async post<T = any>(
+  public async post<T = any, D = any>(
     url: string,
-    data?: any,
+    data?: D,
     config?: AxiosRequestConfig
-  ): Promise<ApiResponse<T>> {
-    const response: AxiosResponse<ApiResponse<T>> =
-      await this.axiosInstance.post(url, data, config);
+  ): Promise<T> {
+    const response: AxiosResponse<T> = await this.axiosInstance.post(
+      url,
+      data,
+      config
+    );
     return response.data;
   }
 
-  public async put<T = any>(
+  public async put<T = any, D = any>(
     url: string,
-    data?: any,
+    data?: D,
     config?: AxiosRequestConfig
-  ): Promise<ApiResponse<T>> {
-    const response: AxiosResponse<ApiResponse<T>> =
-      await this.axiosInstance.put(url, data, config);
+  ): Promise<T> {
+    const response: AxiosResponse<T> = await this.axiosInstance.put(
+      url,
+      data,
+      config
+    );
     return response.data;
   }
 
   public async delete<T = any>(
     url: string,
     config?: AxiosRequestConfig
-  ): Promise<ApiResponse<T>> {
-    const response: AxiosResponse<ApiResponse<T>> =
-      await this.axiosInstance.delete(url, config);
+  ): Promise<T> {
+    const response: AxiosResponse<T> = await this.axiosInstance.delete(
+      url,
+      config
+    );
     return response.data;
   }
 }
